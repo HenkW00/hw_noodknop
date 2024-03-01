@@ -4,7 +4,7 @@ lua54 'yes'
 
 author 'Henk W'
 description 'Noodknop systeem voor AMRP'
-version '1.2.1'
+version '1.2.2'
 
 shared_scripts { 
   'config.lua',
