@@ -18,11 +18,11 @@ RegisterCommand('panic', function(source, args, rawCommand)
 
 	if Cooldown == 0 then 
 		TriggerServerEvent('hw_noodknop:firepanic', senderPosition)
-		debugPrint('[hw_noodknop] [INFO] Triggering Network Panic Event')
+		debugPrint('^0[^1DEBUG^0] ^5Triggering Network Panic Event')
 		Cooldown = Config.Cooldown
 	else 
 		ESX.ShowNotification(Translate('cooldown_active'))
-		debugPrint('[hw_noodknop] [INFO] Cooldown is active..')
+		debugPrint('^0[^1DEBUG^0] ^5Cooldown is active..')
 	end
 end, false)
 
@@ -31,11 +31,11 @@ RegisterCommand('position', function(source, args, rawCommand)
 	
 	if Cooldown == 0 then 
 		TriggerServerEvent('hw_noodknop:firepos', senderPosition)
-		debugPrint('[hw_noodknop] [INFO] Triggering Network Position Event')
+		debugPrint('^0[^1DEBUG^0] ^5Triggering Network Position Event')
 		Cooldown = Config.Cooldown
 	else 
 		ESX.ShowNotification(Translate('cooldown_active'))
-		debugPrint('[hw_noodknop] [INFO] Cooldown is active..')
+		debugPrint('^0[^1DEBUG^0] ^5Cooldown is active..')
 	end
 
 end, false)
@@ -69,14 +69,14 @@ RegisterNetEvent('hw_noodknop:sendPosition', function(pos, type)
 	if Sounds.Enabled then 
 		if type == 'panic' then
 			exports['xsound']:PlayUrl('panic', Sounds.URL, Sounds.Volume)
-			debugPrint('[hw_noodknop] [INFO] Started playing sound from url.')
+			debugPrint('^0[^1DEBUG^0] ^5Started playing sound from url.')
 		end 
 	end  
 
 	if Blip.Enabled then 
 		if type == 'panic' then 
 			panicBlip(pos)
-			debugPrint('[hw_noodknop] [INFO] Started blip function.')
+			debugPrint('^0[^1DEBUG^0] ^5Started blip function.')
 		end
 	end
 	
@@ -90,11 +90,11 @@ RegisterNetEvent('hw_noodknop:sendPosition', function(pos, type)
 
 			if IsControlJustReleased(2, 38) then
 				SetNewWaypoint(pos.x, pos.y)
-				debugPrint('[hw_noodknop] [INFO] Set new waypoint to: x'..tostring(pos.x)..' | y'..tostring(pos.y))
+				debugPrint('^0[^1DEBUG^0] ^5Set new waypoint to: x'..tostring(pos.x)..' | y'..tostring(pos.y))
 				break
 				
 			elseif IsControlJustReleased(2, 47) then
-				debugPrint('[hw_noodknop] [INFO] Rejected position requests.')
+				debugPrint('^0[^1DEBUG^0] ^5Rejected position requests.')
 				break
 			end
 

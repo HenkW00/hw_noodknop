@@ -9,12 +9,7 @@ The HW Noodknop Script provides panic button functionality for emergency service
 
 
 ## Installation
-
-This script is only available through tebex
-
 ```
-After purchase follow these steps.
-
 Installation:
 > Clone or download the script files.
 > Place the hw_noodknop folder in your FiveM server's resources directory.
@@ -47,9 +42,7 @@ Features:
 
 ## Latest update about this script
 
-- Added panic button functionality
-- Improved position notifications and advanced notifications
-- Bug fixes and performance improvements
+- 
 
 
 

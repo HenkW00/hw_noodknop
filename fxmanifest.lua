@@ -3,7 +3,7 @@ games {'gta5'}
 lua54 'yes'
 
 author 'Henk W'
-description 'Noodknop systeem voor AMRP'
+description 'Advanced panic button script for ESX'
 version '1.2.2'
 
 shared_scripts { 
@@ -12,16 +12,12 @@ shared_scripts {
   'locales/*.lua',
 }
 
-client_script 'client/main.lua'
+client_scripts {
+  'client/main.lua',
+}
 
 server_scripts {
 	'server/main.lua',
-}
- 
-escrow_ignore {
-  'config.lua',
-  'locales/en.lua', 
-  'fxmanifest.lua', 
 }
 
 dependency '/assetpacks'

@@ -1,3 +1,84 @@
+-- Panic Network Event
+RegisterNetEvent('hw_noodknop:firepanic', function(senderPosition)
+    if Config.OldESX then
+        local xPlayers = ESX.GetPlayers()
+        local xPlayer2 = ESX.GetPlayerFromId(source)
+
+        local allowedJobs = {'police', 'kmar', 'mechanic', 'ambulance', 'dsi', 'recherche'} -- Add the new jobs here
+
+        if tableContains(allowedJobs, xPlayer2.job.name) then
+            for i = 1, #xPlayers, 1 do
+                local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
+                if tableContains(allowedJobs, xPlayer.job.name) then
+                    TriggerClientEvent('hw_noodknop:sendPosition', xPlayer.source, senderPosition, 'panic')
+                    TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, PanicButtonLayout.Title, PanicButtonLayout.SubTitle, (PanicButtonLayout.Content):format(xPlayer2.getName()), PanicButtonLayout.Icon, 1)
+                    if Config.SelfNotify then
+                        xPlayer.showNotification(Translate('selfnotify_panic'))
+                    end
+                end
+            end
+        end
+    else
+        local xPlayers = ESX.GetExtendedPlayers('job', 'police', 'kmar', 'mechanic', 'ambulance', 'dsi', 'recherche') -- Add the new jobs here
+        local xPlayer2 = ESX.GetPlayerFromId(source)
+        if tableContains({'police', 'kmar', 'mechanic', 'ambulance'}, xPlayer2.job.name) then
+            for _, xPlayer in pairs(xPlayers) do
+                xPlayer.triggerEvent('hw_noodknop:sendPosition', senderPosition, 'panic')
+                xPlayer.triggerEvent('esx:showAdvancedNotification', PanicButtonLayout.Title, PanicButtonLayout.SubTitle, (PanicButtonLayout.Content):format(xPlayer2.getName()), PanicButtonLayout.Icon, 1)
+                if Config.SelfNotify then
+                    xPlayer.showNotification(Translate('selfnotify_panic'))
+                end
+            end
+        end
+    end
+end)
+
+function tableContains(table, element)
+    for _, value in pairs(table) do
+        if value == element then
+            return true
+        end
+    end
+    return false
+end
+ 
+
+-- Position Network Event
+RegisterNetEvent('hw_noodknop:firepos', function(senderPosition)
+    if Config.OldESX then
+        local xPlayers = ESX.GetPlayers()
+        local xPlayer2 = ESX.GetPlayerFromId(source)
+
+        local allowedJobs = {'police', 'kmar', 'mechanic', 'ambulance', 'dsi', 'recherche'} -- Add the new jobs here
+
+        if tableContains(allowedJobs, xPlayer2.job.name) then
+            for i = 1, #xPlayers, 1 do
+                local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
+                if tableContains(allowedJobs, xPlayer.job.name) then
+                    TriggerClientEvent('hw_noodknop:sendPosition', xPlayer.source, senderPosition)
+                    TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, PositionButtonLayout.Title, PositionButtonLayout.SubTitle, (PositionButtonLayout.Content):format(xPlayer2.getName()), PositionButtonLayout.Icon, 1)
+                    if Config.SelfNotify then
+                        xPlayer.showNotification(Translate('selfnotify_position'))
+                    end
+                end
+            end
+        end
+    else
+        local xPlayers = ESX.GetExtendedPlayers('job', 'police', 'kmar', 'mechanic', 'ambulance', 'dsi', 'recherche') -- Add the new jobs here
+        local xPlayer2 = ESX.GetPlayerFromId(source)
+        if tableContains({'police', 'kmar', 'mechanic', 'ambulance'}, xPlayer2.job.name) then
+            for _, xPlayer in pairs(xPlayers) do
+                xPlayer.triggerEvent('hw_noodknop:sendPosition', senderPosition)
+                xPlayer.triggerEvent('esx:showAdvancedNotification', PositionButtonLayout.Title, PositionButtonLayout.SubTitle, (PositionButtonLayout.Content):format(xPlayer2.getName()), PositionButtonLayout.Icon, 1)
+                if Config.SelfNotify then
+                    xPlayer.showNotification(Translate('selfnotify_position'))
+                end
+            end
+        end
+    end
+end)
+
+---- Version checker (dont remove)
 local resourceName = "hw_noodknop"
 local scriptVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
 
@@ -78,88 +159,3 @@ AddEventHandler('onResourceStop', function(resourceName)
 
     sendDiscordEmbed(embed)
 end)
-
-
-
-
-
--- Panic Network Event
-RegisterNetEvent('hw_noodknop:firepanic', function(senderPosition)
-    if Config.OldESX then
-        local xPlayers = ESX.GetPlayers()
-        local xPlayer2 = ESX.GetPlayerFromId(source)
-
-        local allowedJobs = {'police', 'kmar', 'mechanic', 'ambulance', 'dsi', 'recherche'} -- Add the new jobs here
-
-        if tableContains(allowedJobs, xPlayer2.job.name) then
-            for i = 1, #xPlayers, 1 do
-                local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-                if tableContains(allowedJobs, xPlayer.job.name) then
-                    TriggerClientEvent('hw_noodknop:sendPosition', xPlayer.source, senderPosition, 'panic')
-                    TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, PanicButtonLayout.Title, PanicButtonLayout.SubTitle, (PanicButtonLayout.Content):format(xPlayer2.getName()), PanicButtonLayout.Icon, 1)
-                    if Config.SelfNotify then
-                        xPlayer.showNotification(Translate('selfnotify_panic'))
-                    end
-                end
-            end
-        end
-    else
-        local xPlayers = ESX.GetExtendedPlayers('job', 'police', 'kmar', 'mechanic', 'ambulance', 'dsi', 'recherche') -- Add the new jobs here
-        local xPlayer2 = ESX.GetPlayerFromId(source)
-        if tableContains({'police', 'kmar', 'mechanic', 'ambulance'}, xPlayer2.job.name) then
-            for _, xPlayer in pairs(xPlayers) do
-                xPlayer.triggerEvent('hw_noodknop:sendPosition', senderPosition, 'panic')
-                xPlayer.triggerEvent('esx:showAdvancedNotification', PanicButtonLayout.Title, PanicButtonLayout.SubTitle, (PanicButtonLayout.Content):format(xPlayer2.getName()), PanicButtonLayout.Icon, 1)
-                if Config.SelfNotify then
-                    xPlayer.showNotification(Translate('selfnotify_panic'))
-                end
-            end
-        end
-    end
-end)
-
-function tableContains(table, element)
-    for _, value in pairs(table) do
-        if value == element then
-            return true
-        end
-    end
-    return false
-end
- 
-
--- Position Network Event
-RegisterNetEvent('hw_noodknop:firepos', function(senderPosition)
-    if Config.OldESX then
-        local xPlayers = ESX.GetPlayers()
-        local xPlayer2 = ESX.GetPlayerFromId(source)
-
-        local allowedJobs = {'police', 'kmar', 'mechanic', 'ambulance', 'dsi', 'recherche'} -- Add the new jobs here
-
-        if tableContains(allowedJobs, xPlayer2.job.name) then
-            for i = 1, #xPlayers, 1 do
-                local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-                if tableContains(allowedJobs, xPlayer.job.name) then
-                    TriggerClientEvent('hw_noodknop:sendPosition', xPlayer.source, senderPosition)
-                    TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, PositionButtonLayout.Title, PositionButtonLayout.SubTitle, (PositionButtonLayout.Content):format(xPlayer2.getName()), PositionButtonLayout.Icon, 1)
-                    if Config.SelfNotify then
-                        xPlayer.showNotification(Translate('selfnotify_position'))
-                    end
-                end
-            end
-        end
-    else
-        local xPlayers = ESX.GetExtendedPlayers('job', 'police', 'kmar', 'mechanic', 'ambulance', 'dsi', 'recherche') -- Add the new jobs here
-        local xPlayer2 = ESX.GetPlayerFromId(source)
-        if tableContains({'police', 'kmar', 'mechanic', 'ambulance'}, xPlayer2.job.name) then
-            for _, xPlayer in pairs(xPlayers) do
-                xPlayer.triggerEvent('hw_noodknop:sendPosition', senderPosition)
-                xPlayer.triggerEvent('esx:showAdvancedNotification', PositionButtonLayout.Title, PositionButtonLayout.SubTitle, (PositionButtonLayout.Content):format(xPlayer2.getName()), PositionButtonLayout.Icon, 1)
-                if Config.SelfNotify then
-                    xPlayer.showNotification(Translate('selfnotify_position'))
-                end
-            end
-        end
-    end
-end)
-  
