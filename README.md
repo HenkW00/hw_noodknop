@@ -42,7 +42,12 @@ Features:
 
 ## Latest update about this script
 
-- 
+- Changed README
+- Removed update text file
+- Removed Version text file
+- Removed old escrow ignore from fxmanifest 
+- Changed debug prints
+- Replaced version check
 
 
 

@@ -4,7 +4,7 @@ lua54 'yes'
 
 author 'Henk W'
 description 'Advanced panic button script for ESX'
-version '1.2.2'
+version '1.2.3'
 
 shared_scripts { 
   'config.lua',
